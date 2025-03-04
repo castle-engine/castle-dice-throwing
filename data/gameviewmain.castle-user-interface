@@ -428,7 +428,7 @@
                         "$$ClassName" : "TCastleVector2Persistent",
                         "X" : 2.9000000000000000E+002
                       },
-                      "Value" : 8.0000000000000000E+000,
+                      "Value" : 1.2000000000000000E+001,
                       "VerticalAnchorParent" : "vpMiddle",
                       "VerticalAnchorSelf" : "vpMiddle"
                     }
@@ -628,6 +628,45 @@
                       "VerticalAnchorSelf" : "vpMiddle"
                     }
                   ]
+                },
+                {
+                  "$$ClassName" : "TCastleHorizontalGroup",
+                  "Name" : "HorizontalGroup9",
+                  "Spacing" : 2.0000000000000000E+001,
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "Y" : -2.4600000000000000E+002
+                  },
+                  "VerticalAnchorParent" : "vpTop",
+                  "VerticalAnchorSelf" : "vpTop",
+                  "$Children" : [
+                    {
+                      "$$ClassName" : "TCastleLabel",
+                      "ColorPersistent" : {
+                        "$$ClassName" : "TCastleColorPersistent",
+                        "Green" : 8.8627451658248901E-001,
+                        "Red" : 1.0000000000000000E+000
+                      },
+                      "Name" : "Label9",
+                      "Text" : [
+                        "AvoidAngleBottom"
+                      ],
+                      "VerticalAnchorParent" : "vpMiddle",
+                      "VerticalAnchorSelf" : "vpMiddle"
+                    },
+                    {
+                      "$$ClassName" : "TCastleFloatEdit",
+                      "CaptureAllInput" : false,
+                      "Name" : "EditAvoidAngleBottom",
+                      "TranslationPersistent" : {
+                        "$$ClassName" : "TCastleVector2Persistent",
+                        "X" : 2.0800000000000000E+002
+                      },
+                      "Value" : 8.0000001192092896E-001,
+                      "VerticalAnchorParent" : "vpMiddle",
+                      "VerticalAnchorSelf" : "vpMiddle"
+                    }
+                  ]
                 }
               ]
             },
@@ -638,7 +677,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -2.7600000000000000E+002
+                "Y" : -3.1700000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -752,7 +791,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -3.3500000000000000E+002
+                "Y" : -3.7600000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -967,7 +1006,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -3.9400000000000000E+002
+                "Y" : -4.3500000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",

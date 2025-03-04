@@ -36,7 +36,7 @@ type
     DicePhysics, SceneDice1, SceneDice2, SceneDice3: TCastleTransform;
     EditStrengthImpulseHorizontal, EditStrengthImpulseVertical,
       EditImpulseRandomShift, EditAngularVelocityDamp,
-      EditMass, EditFriction: TCastleFloatEdit;
+      EditMass, EditFriction, EditAvoidAngleBottom: TCastleFloatEdit;
     MainViewport: TCastleViewport;
   private
     ButtonDesired: array [1..6] of TCastleButton;
@@ -159,7 +159,7 @@ var
     Should be >= 0, larges values make it spin more. }
   ImpulseRandomShift: Single;
 var
-  ImpulseAngle, ImpulseX, ImpulseZ: Single;
+  ImpulseAngle, ImpulseX, ImpulseZ, AvoidAngleBottom: Single;
   ImpulseDir, ImpulsePos: TVector3;
 begin
   // reset position and rotation
@@ -175,13 +175,14 @@ begin
   StrengthImpulseHorizontal := EditStrengthImpulseHorizontal.Value;
   StrengthImpulseVertical := EditStrengthImpulseVertical.Value;
   ImpulseRandomShift := EditImpulseRandomShift.Value;
+  AvoidAngleBottom := EditAvoidAngleBottom.Value;
   DicePhysics.RigidBody.AngularVelocityDamp := EditAngularVelocityDamp.Value;
   DicePhysics.Collider.Friction := EditFriction.Value;
   DicePhysics.Collider.Mass := EditMass.Value;
 
   { Random impulse, to make the throw look more interesting. }
 
-  ImpulseAngle := Random * 2 * Pi;
+  ImpulseAngle := RandomFloatRange(AvoidAngleBottom, 2 * Pi - AvoidAngleBottom);
   SinCos(ImpulseAngle, ImpulseX, ImpulseZ);
   ImpulseDir := Vector3(
     StrengthImpulseHorizontal * ImpulseX,
