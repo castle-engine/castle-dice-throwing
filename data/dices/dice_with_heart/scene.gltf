@@ -1,0 +1,278 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 37133,
+      "max": [
+        2.8707199096679688,
+        2.9661200046539307,
+        3.282210111618042
+      ],
+      "min": [
+        -3.1429200172424316,
+        -3.0440099239349365,
+        -2.7266199588775635
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 445596,
+      "componentType": 5126,
+      "count": 37133,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 218880,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 891192,
+      "componentType": 5126,
+      "count": 10101,
+      "max": [
+        2.864180088043213,
+        2.9593899250030518,
+        3.276170015335083
+      ],
+      "min": [
+        -3.1368799209594727,
+        -3.0379700660705566,
+        -2.7205801010131836
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1012404,
+      "componentType": 5126,
+      "count": 10101,
+      "max": [
+        0.9999956488609314,
+        0.9999956488609314,
+        0.9999956488609314
+      ],
+      "min": [
+        -0.9999956488609314,
+        -0.9999956488609314,
+        -0.9999956488609314
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 875520,
+      "componentType": 5125,
+      "count": 56448,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "yevheniia (https://sketchfab.com/yevheniia)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/dice-with-heart-d152a5266e76416b8a0682b520f7c067",
+      "title": "dice with heart"
+    },
+    "generator": "Sketchfab-12.66.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1101312,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1133616,
+      "byteOffset": 1101312,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 2234928,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            0.013910060975609756,
+            0.013910060975609756,
+            0.013910060975609756,
+            1.0
+          ],
+          "glossinessFactor": 0.6751143292682926,
+          "specularFactor": [
+            0.13795731912528583,
+            0.13795731912528583,
+            0.13795731912528583
+          ]
+        }
+      },
+      "name": "black_plastic"
+    },
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            0.6663490853658537,
+            0.6663490853658537,
+            0.6663490853658537,
+            1.0
+          ],
+          "glossinessFactor": 0.799999997,
+          "specularFactor": [
+            0.47942073883870046,
+            0.47942073883870046,
+            0.47942073883870046
+          ]
+        }
+      },
+      "name": "white_plastic"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Plane.003_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Plane.003_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        5
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        3,
+        4
+      ],
+      "name": "Plane.003"
+    },
+    {
+      "mesh": 0,
+      "name": "Plane.003_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Plane.003_1"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        0.56451,
+        0.79596,
+        0.21858000000000002,
+        0.0,
+        -0.6327400000000002,
+        0.24723000000000003,
+        0.7338300000000001,
+        0.0,
+        0.53006,
+        -0.5525599999999999,
+        0.6432000000000001,
+        0.0,
+        14.22538,
+        -16.521810000000002,
+        20.917150000000003,
+        1.0
+      ],
+      "name": "Area"
+    },
+    {
+      "name": "Area"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Model Information:
+* title:	dice with heart
+* source:	https://sketchfab.com/3d-models/dice-with-heart-d152a5266e76416b8a0682b520f7c067
+* author:	yevheniia (https://sketchfab.com/yevheniia)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "dice with heart" (https://sketchfab.com/3d-models/dice-with-heart-d152a5266e76416b8a0682b520f7c067) by yevheniia (https://sketchfab.com/yevheniia) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
