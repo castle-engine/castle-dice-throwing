@@ -34,6 +34,7 @@ type
     LabelFps: TCastleLabel;
     ButtonThrow: TCastleButton;
     DicePhysics: TCastleTransform;
+    TransformDiceToMatchDesired: TCastleTransform;
     EditStrengthImpulseHorizontal, EditStrengthImpulseVertical,
       EditImpulseRandomShift, EditAngularVelocityDamp,
       EditMass, EditFriction, EditAvoidAngleBottom: TCastleFloatEdit;
@@ -45,7 +46,7 @@ type
     TransformDice: array [TDiceLook] of TCastleTransform;
     InitialDiceTranslation: TVector3;
     InitialDiceRotation: TVector4;
-    DesiredOutcome: 1..6;
+    DesiredOutcome: TDiceResult;
     AwakeLifeTime: TFloatTime;
     AwakeMeasuring: Boolean;
     { Current result of the dice, looking at DicePhysics rotation.
@@ -131,6 +132,33 @@ begin
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
+
+  { Rotate the dice to match the desired outcome. }
+  procedure AdjustTransformDiceToMatchDesired(const Current, Desired: TDiceResult);
+  var
+    Axis: Integer;
+    RotationAxis: TVector3;
+    NewDiceResult: TDiceResult;
+  begin
+    if Current = Desired then
+      Exit; // nothing to do
+    { Brute-force solution: rotate 90, -90 or 180 around one axis. }
+    for Axis := 0 to 2 do
+    begin
+      RotationAxis := TVector3.One[Axis];
+      TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, -Pi / 2);
+      if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
+        Exit;
+      TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, Pi / 2);
+      if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
+        Exit;
+      TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, Pi);
+      if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
+        Exit;
+    end;
+    WritelnWarning('Cannot adjust dice to match desired outcome');
+  end;
+
 var
   DiceResult: TDiceResult;
 begin
@@ -146,8 +174,10 @@ begin
     AwakeMeasuring := false;
     WritelnLog('Was awake for %f seconds', [AwakeLifeTime]);
     if CurrentDiceResult(DiceResult) then
-      WritelnLog('Dice result is %d', [DiceResult])
-    else
+    begin
+      WritelnLog('Dice result is %d', [DiceResult]);
+      AdjustTransformDiceToMatchDesired(DiceResult, DesiredOutcome);
+    end else
       WritelnLog('Dice result is not clear');
   end;
 end;
@@ -187,6 +217,8 @@ begin
   DicePhysics.Rotation := InitialDiceRotation;
   DicePhysics.RigidBody.LinearVelocity := TVector3.Zero;
   DicePhysics.RigidBody.AngularVelocity := TVector3.Zero;
+  // start with no rotation in TransformDiceToMatchDesired
+  TransformDiceToMatchDesired.Rotation := TVector4.Zero;
 
   // start physics (initially disabled)
   MainViewport.Items.EnablePhysics := true;
