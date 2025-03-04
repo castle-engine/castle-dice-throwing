@@ -19,7 +19,7 @@ unit GameViewMain;
 interface
 
 uses Classes,
-  CastleVectors, CastleComponentSerialize, CastleViewport,
+  CastleVectors, CastleComponentSerialize, CastleViewport, CastleTimeUtils,
   CastleUIControls, CastleControls, CastleKeysMouse, CastleTransform, CastleScene;
 
 type
@@ -45,6 +45,8 @@ type
     InitialDiceTranslation: TVector3;
     InitialDiceRotation: TVector4;
     DesiredOutcome: 1..6;
+    AwakeLifeTime: TFloatTime;
+    AwakeMeasuring: Boolean;
     procedure ClickThrow(Sender: TObject);
     procedure ClickDesired(Sender: TObject);
     procedure ClickDiceLook(Sender: TObject);
@@ -63,7 +65,7 @@ var
 implementation
 
 uses SysUtils, Math,
-  CastleUtils;
+  CastleUtils, CastleLog;
 
 { TViewMain ----------------------------------------------------------------- }
 
@@ -130,6 +132,14 @@ begin
   { This virtual method is executed every frame (many times per second). }
   Assert(LabelFps <> nil, 'If you remove LabelFps from the design, remember to remove also the assignment "LabelFps.Caption := ..." from code');
   LabelFps.Caption := 'FPS: ' + Container.Fps.ToString;
+  if AwakeMeasuring and DicePhysics.RigidBody.Awake then
+    AwakeLifeTime := AwakeLifeTime + SecondsPassed
+  else
+  if AwakeMeasuring then
+  begin
+    AwakeMeasuring := false;
+    WritelnLog('Was awake for %f seconds', [AwakeLifeTime]);
+  end;
 end;
 
 procedure TViewMain.ChangeAngularVelocityDamp(Sender: TObject);
@@ -171,6 +181,10 @@ begin
   // start physics (initially disabled)
   MainViewport.Items.EnablePhysics := true;
 
+  // measure awake time (useful to later know how long to simulate)
+  AwakeLifeTime := 0;
+  AwakeMeasuring := true;
+
   // use UI parameters
   StrengthImpulseHorizontal := EditStrengthImpulseHorizontal.Value;
   StrengthImpulseVertical := EditStrengthImpulseVertical.Value;
@@ -209,6 +223,9 @@ begin
   for I := 1 to 6 do
     ButtonDesired[I].Pressed := Button.Tag = I;
   // TODO: make the DesiredOutcome happen
+  // measure until now Awake or 3 secs passed
+  // frequency 30 fps
+  // rotate dice, playback then
 end;
 
 procedure TViewMain.ClickDiceLook(Sender: TObject);

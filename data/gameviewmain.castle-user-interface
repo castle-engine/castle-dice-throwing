@@ -389,7 +389,18 @@
           "$Children" : [
             {
               "$$ClassName" : "TCastleVerticalGroup",
+              "Border" : {
+                "$$ClassName" : "TBorder",
+                "AllSides" : 2.0000000000000000E+000
+              },
+              "BorderColorPersistent" : {
+                "$$ClassName" : "TCastleColorPersistent",
+                "Alpha" : 1.0000000000000000E+000,
+                "Green" : 9.4901961088180542E-001,
+                "Red" : 1.0000000000000000E+000
+              },
               "Name" : "DebugUi",
+              "Padding" : 1.0000000000000000E+001,
               "Spacing" : 1.0000000000000000E+001,
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
@@ -400,9 +411,33 @@
               "VerticalAnchorSelf" : "vpTop",
               "$Children" : [
                 {
+                  "$$ClassName" : "TCastleLabel",
+                  "ColorPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Green" : 8.8627451658248901E-001,
+                    "Red" : 1.0000000000000000E+000
+                  },
+                  "Name" : "Label10",
+                  "Text" : [
+                    "Debug things, don't touch!"
+                  ],
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -1.0000000000000000E+001
+                  },
+                  "VerticalAnchorParent" : "vpTop",
+                  "VerticalAnchorSelf" : "vpTop"
+                },
+                {
                   "$$ClassName" : "TCastleHorizontalGroup",
                   "Name" : "HorizontalGroup3",
                   "Spacing" : 2.0000000000000000E+001,
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -4.2000000000000000E+001
+                  },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
                   "$Children" : [
@@ -440,7 +475,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -4.1000000000000000E+001
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -8.3000000000000000E+001
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -479,7 +515,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -8.2000000000000000E+001
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -1.2400000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -518,7 +555,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -1.2300000000000000E+002
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -1.6500000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -557,7 +595,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -1.6400000000000000E+002
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -2.0600000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -596,7 +635,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -2.0500000000000000E+002
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -2.4700000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -635,7 +675,8 @@
                   "Spacing" : 2.0000000000000000E+001,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -2.4600000000000000E+002
+                    "X" : 1.0000000000000000E+001,
+                    "Y" : -2.8800000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpTop",
                   "VerticalAnchorSelf" : "vpTop",
@@ -677,7 +718,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -3.1700000000000000E+002
+                "Y" : -3.7100000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -791,7 +832,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -3.7600000000000000E+002
+                "Y" : -4.3000000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -1006,7 +1047,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -4.3500000000000000E+002
+                "Y" : -4.8900000000000000E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
