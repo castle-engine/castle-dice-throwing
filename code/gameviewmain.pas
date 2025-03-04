@@ -19,7 +19,7 @@ unit GameViewMain;
 interface
 
 uses Classes,
-  CastleVectors, CastleComponentSerialize,
+  CastleVectors, CastleComponentSerialize, CastleViewport,
   CastleUIControls, CastleControls, CastleKeysMouse, CastleTransform, CastleScene;
 
 type
@@ -34,6 +34,10 @@ type
       ButtonDesired4, ButtonDesired5, ButtonDesired6,
       ButtonDiceLook1, ButtonDiceLook2, ButtonDiceLook3: TCastleButton;
     DicePhysics, SceneDice1, SceneDice2, SceneDice3: TCastleTransform;
+    EditStrengthImpulseHorizontal, EditStrengthImpulseVertical,
+      EditImpulseRandomShift, EditAngularVelocityDamp,
+      EditMass, EditFriction: TCastleFloatEdit;
+    MainViewport: TCastleViewport;
   private
     ButtonDesired: array [1..6] of TCastleButton;
     ButtonDiceLook: array [1..3] of TCastleButton;
@@ -44,6 +48,9 @@ type
     procedure ClickThrow(Sender: TObject);
     procedure ClickDesired(Sender: TObject);
     procedure ClickDiceLook(Sender: TObject);
+    procedure ChangeAngularVelocityDamp(Sender: TObject);
+    procedure ChangeMass(Sender: TObject);
+    procedure ChangeFriction(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
     procedure Start; override;
@@ -107,6 +114,14 @@ begin
   InitialDiceTranslation := DicePhysics.Translation;
   InitialDiceRotation := DicePhysics.Rotation;
   DesiredOutcome := 1; // assumes UI has ButtonDesired1 pressed by default
+
+  // enable on 1st dice throw
+  MainViewport.Items.EnablePhysics := false;
+
+  // assign edit events, to adjust physics values as dice is rolling
+  EditAngularVelocityDamp.OnChange := {$ifdef FPC}@{$endif} ChangeAngularVelocityDamp;
+  EditMass.OnChange := {$ifdef FPC}@{$endif} ChangeMass;
+  EditFriction.OnChange := {$ifdef FPC}@{$endif} ChangeFriction;
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
@@ -117,25 +132,55 @@ begin
   LabelFps.Caption := 'FPS: ' + Container.Fps.ToString;
 end;
 
+procedure TViewMain.ChangeAngularVelocityDamp(Sender: TObject);
+begin
+  DicePhysics.RigidBody.AngularVelocityDamp := EditAngularVelocityDamp.Value;
+end;
+
+procedure TViewMain.ChangeMass(Sender: TObject);
+begin
+  DicePhysics.Collider.Mass := EditMass.Value;
+end;
+
+procedure TViewMain.ChangeFriction(Sender: TObject);
+begin
+  DicePhysics.Collider.Friction := EditFriction.Value;
+end;
+
 procedure TViewMain.ClickThrow(Sender: TObject);
-const
+var
   { How much to push in horizontal.
     Should be >= 0, larges values make it go horizontally more. }
-  StrengthImpulseHorizontal: Single = 0.5;
+  StrengthImpulseHorizontal: Single;
   { How much to push in vertical.
     Can be any number - negative, positive, zero. }
-  StrengthImpulseVertical: Single = 0.5;
+  StrengthImpulseVertical: Single;
   { Randomize the point of impulse, making dice spin a bit.
     Should be >= 0, larges values make it spin more. }
-  ImpulseRandomShift = 0.1;
+  ImpulseRandomShift: Single;
 var
   ImpulseAngle, ImpulseX, ImpulseZ: Single;
   ImpulseDir, ImpulsePos: TVector3;
 begin
+  // reset position and rotation
   DicePhysics.Translation := InitialDiceTranslation;
   DicePhysics.Rotation := InitialDiceRotation;
+  DicePhysics.RigidBody.LinearVelocity := TVector3.Zero;
+  DicePhysics.RigidBody.AngularVelocity := TVector3.Zero;
+
+  // start physics (initially disabled)
+  MainViewport.Items.EnablePhysics := true;
+
+  // use UI parameters
+  StrengthImpulseHorizontal := EditStrengthImpulseHorizontal.Value;
+  StrengthImpulseVertical := EditStrengthImpulseVertical.Value;
+  ImpulseRandomShift := EditImpulseRandomShift.Value;
+  DicePhysics.RigidBody.AngularVelocityDamp := EditAngularVelocityDamp.Value;
+  DicePhysics.Collider.Friction := EditFriction.Value;
+  DicePhysics.Collider.Mass := EditMass.Value;
 
   { Random impulse, to make the throw look more interesting. }
+
   ImpulseAngle := Random * 2 * Pi;
   SinCos(ImpulseAngle, ImpulseX, ImpulseZ);
   ImpulseDir := Vector3(
@@ -150,9 +195,7 @@ begin
     RandomFloatRange(-ImpulseRandomShift, ImpulseRandomShift)
   );
 
-  DicePhysics.RigidBody.ApplyImpulse(
-    ImpulseDir, ImpulsePos);
-  // TODO: more interesting throw
+  DicePhysics.RigidBody.ApplyImpulse(ImpulseDir, ImpulsePos);
 end;
 
 procedure TViewMain.ClickDesired(Sender: TObject);
