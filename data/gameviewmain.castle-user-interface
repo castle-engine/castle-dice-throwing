@@ -100,9 +100,10 @@
             "$Children" : [
               {
                 "$$ClassName" : "TCastleScene",
+                "Exists" : false,
                 "ExposeTransforms" : [
                 ],
-                "Name" : "SceneDice1",
+                "Name" : "TransformDice1",
                 "RenderOptions" : {
                   "$$ClassName" : "TCastleScene.TSceneRenderOptions"
                 },
@@ -119,52 +120,76 @@
                 "Url" : "castle-data:/dices/dice_2/scene.gltf"
               },
               {
-                "$$ClassName" : "TCastleScene",
+                "$$ClassName" : "TCastleTransform",
                 "Exists" : false,
-                "ExposeTransforms" : [
-                ],
-                "Name" : "SceneDice2",
-                "RenderOptions" : {
-                  "$$ClassName" : "TCastleScene.TSceneRenderOptions"
-                },
+                "Name" : "TransformDice2",
                 "RotationPersistent" : {
                   "$$ClassName" : "TCastleVector4RotationPersistent",
-                  "Z" : 1.0000000000000000E+000
-                },
-                "ScalePersistent" : {
-                  "$$ClassName" : "TCastleVector3Persistent",
-                  "X" : 5.0000000745058060E-002,
-                  "Y" : 5.0000000745058060E-002,
-                  "Z" : 5.0000000745058060E-002
-                },
-                "Url" : "castle-data:/dices/dice/scene.gltf"
-              },
-              {
-                "$$ClassName" : "TCastleScene",
-                "Exists" : false,
-                "ExposeTransforms" : [
-                ],
-                "Name" : "SceneDice3",
-                "RenderOptions" : {
-                  "$$ClassName" : "TCastleScene.TSceneRenderOptions",
-                  "WholeSceneManifold" : true
-                },
-                "RotationPersistent" : {
-                  "$$ClassName" : "TCastleVector4RotationPersistent",
-                  "Z" : 1.0000000000000000E+000
-                },
-                "ScalePersistent" : {
-                  "$$ClassName" : "TCastleVector3Persistent",
-                  "X" : 1.5999999642372131E-001,
-                  "Y" : 1.5999999642372131E-001,
-                  "Z" : 1.5999999642372131E-001
+                  "W" : 3.1415927410125732E+000,
+                  "Y" : 1.0000003576278687E+000
                 },
                 "TranslationPersistent" : {
                   "$$ClassName" : "TCastleVector3Persistent",
-                  "X" : 1.9057668745517731E-002,
-                  "Y" : -2.5940943509340286E-002
+                  "X" : 1.9060000777244568E-002,
+                  "Y" : -2.5939999148249626E-002
                 },
-                "Url" : "castle-data:/dices/dice_with_heart/scene.gltf"
+                "$Children" : [
+                  {
+                    "$$ClassName" : "TCastleScene",
+                    "ExposeTransforms" : [
+                    ],
+                    "Name" : "SceneDiceHearts",
+                    "RenderOptions" : {
+                      "$$ClassName" : "TCastleScene.TSceneRenderOptions",
+                      "WholeSceneManifold" : true
+                    },
+                    "RotationPersistent" : {
+                      "$$ClassName" : "TCastleVector4RotationPersistent",
+                      "Z" : 1.0000000000000000E+000
+                    },
+                    "ScalePersistent" : {
+                      "$$ClassName" : "TCastleVector3Persistent",
+                      "X" : 1.5999999642372131E-001,
+                      "Y" : 1.5999999642372131E-001,
+                      "Z" : 1.5999999642372131E-001
+                    },
+                    "Url" : "castle-data:/dices/dice_with_heart/scene.gltf"
+                  }
+                ]
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformDice3",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : 3.1413483619689941E+000,
+                  "X" : -1.2213444279041141E-004,
+                  "Y" : -7.0710676908493042E-001,
+                  "Z" : -7.0710676908493042E-001
+                },
+                "$Children" : [
+                  {
+                    "$$ClassName" : "TCastleScene",
+                    "ExposeTransforms" : [
+                    ],
+                    "Name" : "SceneDiceAlt",
+                    "RenderOptions" : {
+                      "$$ClassName" : "TCastleScene.TSceneRenderOptions",
+                      "RobustNegativeScale" : true
+                    },
+                    "RotationPersistent" : {
+                      "$$ClassName" : "TCastleVector4RotationPersistent",
+                      "Z" : 1.0000000000000000E+000
+                    },
+                    "ScalePersistent" : {
+                      "$$ClassName" : "TCastleVector3Persistent",
+                      "X" : -5.0000000745058060E-002,
+                      "Y" : 5.0000000745058060E-002,
+                      "Z" : 5.0000000745058060E-002
+                    },
+                    "Url" : "castle-data:/dices/dice/scene.gltf"
+                  }
+                ]
               },
               {
                 "$$ClassName" : "TCastleTransform",
@@ -218,8 +243,10 @@
                 "Name" : "TransformResult6",
                 "RotationPersistent" : {
                   "$$ClassName" : "TCastleVector4RotationPersistent",
-                  "W" : -1.5707963705062866E+000,
-                  "X" : -1.0000004768371582E+000
+                  "W" : 3.1412475109100342E+000,
+                  "X" : 1.7260256572626531E-004,
+                  "Y" : 7.0710664987564087E-001,
+                  "Z" : -7.0710688829421997E-001
                 }
               }
             ],
@@ -368,20 +395,16 @@
         },
         "RotationPersistent" : {
           "$$ClassName" : "TCastleVector4RotationPersistent",
-          "W" : 1.7468496561050415E+000,
-          "X" : -1.8730455636978149E-001,
-          "Y" : 9.5865440368652344E-001,
-          "Z" : 2.1424020826816559E-001
-        },
-        "ScalePersistent" : {
-          "$$ClassName" : "TCastleVector3Persistent",
-          "Y" : 1.0000001192092896E+000
+          "W" : 1.0293895006179810E+000,
+          "X" : -4.3610310554504395E-001,
+          "Y" : 8.7380462884902954E-001,
+          "Z" : 2.1512779593467712E-001
         },
         "TranslationPersistent" : {
           "$$ClassName" : "TCastleVector3Persistent",
-          "X" : 4.1478047370910645E+000,
-          "Y" : 6.3215570449829102E+000,
-          "Z" : 3.1502211093902588E-001
+          "X" : 4.5890517234802246E+000,
+          "Y" : 6.7750873565673828E+000,
+          "Z" : 4.8301806449890137E+000
         }
       },
       "InternalDesignNavigations[dnFly]" : {
@@ -827,7 +850,7 @@
                 },
                 {
                   "$$ClassName" : "TCastleButton",
-                  "Caption" : "Alt",
+                  "Caption" : "Hearts",
                   "CustomBackgroundDisabled" : {
                     "$$ClassName" : "TCastleImagePersistent"
                   },
@@ -855,7 +878,7 @@
                 },
                 {
                   "$$ClassName" : "TCastleButton",
-                  "Caption" : "Hearts",
+                  "Caption" : "Alt",
                   "CustomBackgroundDisabled" : {
                     "$$ClassName" : "TCastleImagePersistent"
                   },
@@ -876,7 +899,7 @@
                   "Toggle" : true,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "X" : 2.9800000000000000E+002
+                    "X" : 3.3500000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpMiddle",
                   "VerticalAnchorSelf" : "vpMiddle"

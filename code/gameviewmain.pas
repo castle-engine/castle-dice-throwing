@@ -42,7 +42,7 @@ type
     ButtonDesired: array [1..6] of TCastleButton;
     TransformResult: array [1..6] of TCastleTransform;
     ButtonDiceLook: array [TDiceLook] of TCastleButton;
-    SceneDice: array [TDiceLook] of TCastleTransform;
+    TransformDice: array [TDiceLook] of TCastleTransform;
     InitialDiceTranslation: TVector3;
     InitialDiceRotation: TVector4;
     DesiredOutcome: 1..6;
@@ -96,7 +96,7 @@ begin
   end;
   for I in TDiceLook do
   begin
-    SceneDice[I] := DesignedComponent('SceneDice' + IntToStr(I)) as TCastleTransform;
+    TransformDice[I] := DesignedComponent('TransformDice' + IntToStr(I)) as TCastleTransform;
     ButtonDiceLook[I] := DesignedComponent('ButtonDiceLook' + IntToStr(I)) as TCastleButton;
     ButtonDiceLook[I].OnClick := {$ifdef FPC}@{$endif} ClickDiceLook;
   end;
@@ -247,7 +247,7 @@ begin
   Button := Sender as TCastleButton;
   for I in TDiceLook do
   begin
-    SceneDice[I].Exists := Button.Tag = I;
+    TransformDice[I].Exists := Button.Tag = I;
     ButtonDiceLook[I].Pressed := Button.Tag = I;
   end;
 end;
