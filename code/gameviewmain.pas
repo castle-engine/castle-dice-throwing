@@ -23,30 +23,35 @@ uses Classes,
   CastleUIControls, CastleControls, CastleKeysMouse, CastleTransform, CastleScene;
 
 type
+  TDiceResult = 1..6;
+  TDiceLook = 1..3;
+
   { Main view, where most of the application logic takes place. }
   TViewMain = class(TCastleView)
   published
     { Components designed using CGE editor.
       These fields will be automatically initialized at Start. }
     LabelFps: TCastleLabel;
-    ButtonThrow,
-      ButtonDesired1, ButtonDesired2, ButtonDesired3,
-      ButtonDesired4, ButtonDesired5, ButtonDesired6,
-      ButtonDiceLook1, ButtonDiceLook2, ButtonDiceLook3: TCastleButton;
-    DicePhysics, SceneDice1, SceneDice2, SceneDice3: TCastleTransform;
+    ButtonThrow: TCastleButton;
+    DicePhysics: TCastleTransform;
     EditStrengthImpulseHorizontal, EditStrengthImpulseVertical,
       EditImpulseRandomShift, EditAngularVelocityDamp,
       EditMass, EditFriction, EditAvoidAngleBottom: TCastleFloatEdit;
     MainViewport: TCastleViewport;
   private
     ButtonDesired: array [1..6] of TCastleButton;
-    ButtonDiceLook: array [1..3] of TCastleButton;
-    SceneDice: array [1..3] of TCastleTransform;
+    TransformResult: array [1..6] of TCastleTransform;
+    ButtonDiceLook: array [TDiceLook] of TCastleButton;
+    SceneDice: array [TDiceLook] of TCastleTransform;
     InitialDiceTranslation: TVector3;
     InitialDiceRotation: TVector4;
     DesiredOutcome: 1..6;
     AwakeLifeTime: TFloatTime;
     AwakeMeasuring: Boolean;
+    { Current result of the dice, looking at DicePhysics rotation.
+      Answer @false if cannot determine yet, so dice is not exactly on one
+      of it's sides (e.g. maybe it leans by the wall, slanted). }
+    function CurrentDiceResult(out DiceResult: TDiceResult): Boolean;
     procedure ClickThrow(Sender: TObject);
     procedure ClickDesired(Sender: TObject);
     procedure ClickDiceLook(Sender: TObject);
@@ -81,37 +86,22 @@ var
 begin
   inherited;
 
-  { Put named component in an array, for easier working with them in bulk.
-
-    Note: We could have also initialized their names using a loop,
-    without the need to make ButtonDesiredX published, using
-    TCastleView.DesignedComponent like
-
-      for I := 1 to 6 do
-        ButtonDesired[I] := DesignedComponent('ButtonDesired' + IntToStr(I)) as TCastleButton;
-  }
-
-  ButtonDesired[1] := ButtonDesired1;
-  ButtonDesired[2] := ButtonDesired2;
-  ButtonDesired[3] := ButtonDesired3;
-  ButtonDesired[4] := ButtonDesired4;
-  ButtonDesired[5] := ButtonDesired5;
-  ButtonDesired[6] := ButtonDesired6;
-
-  ButtonDiceLook[1] := ButtonDiceLook1;
-  ButtonDiceLook[2] := ButtonDiceLook2;
-  ButtonDiceLook[3] := ButtonDiceLook3;
-
-  SceneDice[1] := SceneDice1;
-  SceneDice[2] := SceneDice2;
-  SceneDice[3] := SceneDice3;
-
-  { Assign button events. }
-  ButtonThrow.OnClick := {$ifdef FPC}@{$endif} ClickThrow;
-  for I := 1 to 6 do
+  { Put named components in an array, for easier working with them in bulk.
+    And assing some button events }
+  for I in TDiceResult do
+  begin
+    TransformResult[I] := DesignedComponent('TransformResult' + IntToStr(I)) as TCastleTransform;
+    ButtonDesired[I] := DesignedComponent('ButtonDesired' + IntToStr(I)) as TCastleButton;
     ButtonDesired[I].OnClick := {$ifdef FPC}@{$endif} ClickDesired;
-  for I := 1 to 3 do
+  end;
+  for I in TDiceLook do
+  begin
+    SceneDice[I] := DesignedComponent('SceneDice' + IntToStr(I)) as TCastleTransform;
+    ButtonDiceLook[I] := DesignedComponent('ButtonDiceLook' + IntToStr(I)) as TCastleButton;
     ButtonDiceLook[I].OnClick := {$ifdef FPC}@{$endif} ClickDiceLook;
+  end;
+
+  ButtonThrow.OnClick := {$ifdef FPC}@{$endif} ClickThrow;
 
   InitialDiceTranslation := DicePhysics.Translation;
   InitialDiceRotation := DicePhysics.Rotation;
@@ -126,7 +116,23 @@ begin
   EditFriction.OnChange := {$ifdef FPC}@{$endif} ChangeFriction;
 end;
 
+function TViewMain.CurrentDiceResult(out DiceResult: TDiceResult): Boolean;
+const
+  Epsilon = 0.1;
+var
+  I: TDiceResult;
+begin
+  for I in TDiceResult do
+    if TVector3.Equals(TransformResult[I].WorldDirection, TVector3.One[1], Epsilon) then
+    begin
+      DiceResult := I;
+      Exit(true);
+    end;
+end;
+
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
+var
+  DiceResult: TDiceResult;
 begin
   inherited;
   { This virtual method is executed every frame (many times per second). }
@@ -139,6 +145,10 @@ begin
   begin
     AwakeMeasuring := false;
     WritelnLog('Was awake for %f seconds', [AwakeLifeTime]);
+    if CurrentDiceResult(DiceResult) then
+      WritelnLog('Dice result is %d', [DiceResult])
+    else
+      WritelnLog('Dice result is not clear');
   end;
 end;
 
@@ -216,25 +226,26 @@ end;
 procedure TViewMain.ClickDesired(Sender: TObject);
 var
   Button: TCastleButton;
-  I: Integer;
+  I: TDiceResult;
 begin
   Button := Sender as TCastleButton;
   DesiredOutcome := Button.Tag;
-  for I := 1 to 6 do
+  for I in TDiceResult do
     ButtonDesired[I].Pressed := Button.Tag = I;
   // TODO: make the DesiredOutcome happen
   // measure until now Awake or 3 secs passed
   // frequency 30 fps
+  // see if we have a reasonable result
   // rotate dice, playback then
 end;
 
 procedure TViewMain.ClickDiceLook(Sender: TObject);
 var
   Button: TCastleButton;
-  I: Integer;
+  I: TDiceLook;
 begin
   Button := Sender as TCastleButton;
-  for I := 1 to 3 do
+  for I in TDiceLook do
   begin
     SceneDice[I].Exists := Button.Tag = I;
     ButtonDiceLook[I].Pressed := Button.Tag = I;

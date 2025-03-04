@@ -165,6 +165,62 @@
                   "Y" : -2.5940943509340286E-002
                 },
                 "Url" : "castle-data:/dices/dice_with_heart/scene.gltf"
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult1",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : 1.5707963705062866E+000,
+                  "X" : -1.0000004768371582E+000
+                }
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult2",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : 1.5707963705062866E+000,
+                  "Y" : 1.0000000000000000E+000
+                }
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult3",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : 3.1415927410125732E+000,
+                  "X" : 7.0785498619079590E-001,
+                  "Y" : 7.0635777711868286E-001,
+                  "Z" : 3.0941322393118753E-008
+                }
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult4",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : 1.5707963705062866E+000,
+                  "Z" : 1.0000000000000000E+000
+                }
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult5",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : -1.5707963705062866E+000,
+                  "Y" : 1.0000000000000000E+000
+                }
+              },
+              {
+                "$$ClassName" : "TCastleTransform",
+                "Name" : "TransformResult6",
+                "RotationPersistent" : {
+                  "$$ClassName" : "TCastleVector4RotationPersistent",
+                  "W" : -1.5707963705062866E+000,
+                  "X" : -1.0000004768371582E+000
+                }
               }
             ],
             "$Behaviors" : [
@@ -312,18 +368,20 @@
         },
         "RotationPersistent" : {
           "$$ClassName" : "TCastleVector4RotationPersistent",
-          "W" : 1.1100292205810547E+000,
-          "X" : -1.0000000000000000E+000
+          "W" : 1.7468496561050415E+000,
+          "X" : -1.8730455636978149E-001,
+          "Y" : 9.5865440368652344E-001,
+          "Z" : 2.1424020826816559E-001
         },
         "ScalePersistent" : {
           "$$ClassName" : "TCastleVector3Persistent",
-          "Y" : 9.9999994039535522E-001,
-          "Z" : 9.9999994039535522E-001
+          "Y" : 1.0000001192092896E+000
         },
         "TranslationPersistent" : {
           "$$ClassName" : "TCastleVector3Persistent",
-          "Y" : 1.3327857017517090E+001,
-          "Z" : 6.2215676307678223E+000
+          "X" : 4.1478047370910645E+000,
+          "Y" : 6.3215570449829102E+000,
+          "Z" : 3.1502211093902588E-001
         }
       },
       "InternalDesignNavigations[dnFly]" : {
@@ -718,7 +776,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -3.7100000000000000E+002
+                "Y" : -3.7299996948242188E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -832,7 +890,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -4.3000000000000000E+002
+                "Y" : -4.3199996948242188E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
@@ -1047,7 +1105,7 @@
               "TranslationPersistent" : {
                 "$$ClassName" : "TCastleVector2Persistent",
                 "X" : 2.0000000000000000E+001,
-                "Y" : -4.8900000000000000E+002
+                "Y" : -4.9099996948242188E+002
               },
               "VerticalAnchorParent" : "vpTop",
               "VerticalAnchorSelf" : "vpTop",
