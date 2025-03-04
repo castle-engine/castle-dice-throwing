@@ -6,6 +6,8 @@ Despite using the physics simulation (so it looks nice and random), the result i
 
 Using [Castle Game Engine](https://castle-engine.io/).
 
+![Screenshot](screenshot.png)
+
 ## Copyright and License
 
 Copyright: Michalis Kamburelis.
