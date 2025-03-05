@@ -37,6 +37,7 @@ type
       EditMass, EditFriction, EditAvoidAngleBottom: TCastleFloatEdit;
     MainViewport: TCastleViewport;
     CheckboxHideSimulation: TCastleCheckbox;
+    DebugUi: TCastleUserInterface;
   private
     type
       TDiceResult = 1..6;
@@ -152,6 +153,8 @@ begin
   EditAngularVelocityDamp.OnChange := {$ifdef FPC}@{$endif} ChangeAngularVelocityDamp;
   EditMass.OnChange := {$ifdef FPC}@{$endif} ChangeMass;
   EditFriction.OnChange := {$ifdef FPC}@{$endif} ChangeFriction;
+
+  DebugUi.Exists := {$ifdef DEBUG} true {$else} false {$endif};
 end;
 
 function TViewMain.CurrentDiceResult(out DiceResult: TDiceResult): Boolean;
