@@ -859,7 +859,7 @@
                   },
                   "Name" : "Label2",
                   "Text" : [
-                    "Dice Look"
+                    "Dice Look:"
                   ],
                   "VerticalAnchorParent" : "vpMiddle",
                   "VerticalAnchorSelf" : "vpMiddle"
@@ -888,7 +888,7 @@
                   "Toggle" : true,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "X" : 1.1700000000000000E+002
+                    "X" : 1.2400000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpMiddle",
                   "VerticalAnchorSelf" : "vpMiddle"
@@ -916,7 +916,7 @@
                   "Toggle" : true,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "X" : 2.3000000000000000E+002
+                    "X" : 2.3700000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpMiddle",
                   "VerticalAnchorSelf" : "vpMiddle"
@@ -944,7 +944,7 @@
                   "Toggle" : true,
                   "TranslationPersistent" : {
                     "$$ClassName" : "TCastleVector2Persistent",
-                    "X" : 3.3500000000000000E+002
+                    "X" : 3.4200000000000000E+002
                   },
                   "VerticalAnchorParent" : "vpMiddle",
                   "VerticalAnchorSelf" : "vpMiddle"
