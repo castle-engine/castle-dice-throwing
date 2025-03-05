@@ -293,6 +293,16 @@ procedure TViewMain.ClickThrow(Sender: TObject);
     ImpulseAngle, ImpulseX, ImpulseZ, AvoidAngleBottom: Single;
     ImpulseDir, ImpulsePos: TVector3;
   begin
+    { Start physics (initially disabled, disabled also when playing recorded).
+      Note: It's important to enable physics *before*
+      DicePhysics.Translation/Rotation reset below.
+      Otherwise, in case we just finished playback of recorded simulation
+      (with EnablePhysics=false), and we would reset
+      DicePhysics.Translation/Rotation with physics disabled, Kraft
+      could not realize that the dice is now in a new position *not* colliding
+      with ground, and Kraft could make weird initial dice bounce. }
+    MainViewport.Items.EnablePhysics := true;
+
     // reset position and rotation
     DicePhysics.Translation := InitialDiceTranslation;
     DicePhysics.Rotation := InitialDiceRotation;
@@ -300,9 +310,6 @@ procedure TViewMain.ClickThrow(Sender: TObject);
     DicePhysics.RigidBody.AngularVelocity := TVector3.Zero;
     // start with no rotation in TransformDiceToMatchDesired
     TransformDiceToMatchDesired.Rotation := TVector4.Zero;
-
-    // start physics (initially disabled, disabled also when playing recorded)
-    MainViewport.Items.EnablePhysics := true;
 
     // use UI parameters
     StrengthImpulseHorizontal := EditStrengthImpulseHorizontal.Value;
