@@ -2,7 +2,7 @@
 
 Throw a 6-sided dice, using physics, watch how it rolls.
 
-Despite using the physics simulation (so it looks nice and random), the result is predetermined from the start. (This is achieved by first running physics simulation in memory, and then rotating the actual displayed dice to match the result.)
+Despite using the physics simulation (so it looks nice and random), the result is predetermined from the start. (This is achieved by first running physics simulation invisibly and then rotating the actual displayed dice to match the known end rotation.)
 
 Using [Castle Game Engine](https://castle-engine.io/).
 
@@ -10,7 +10,7 @@ Note that a _debug_ build (with `DEBUG` symbol) shows additional UI to tweak phy
 
 ![Screenshot](screenshot.png)
 
-## Pland and Download
+## Play and Download
 
 Play the web version without installation: https://castle-engine.io/web-demos/castle-dice-throwing/
 
@@ -18,11 +18,11 @@ Desktop versions (Windows, Linux): download release here: https://github.com/cas
 
 ## Copyright and License
 
-Copyright: Michalis Kamburelis.
+Copyright: _Michalis Kamburelis_.
 
-License: BSD-3-Clause license, see `LICENSE` for details.
+License: BSD-3-Clause license, see [LICENSE](LICENSE) for details.
 
-Except the dice 3D models, which are created by various artists (see `data/AUTHORS.md`) and are licensed under _CC Attribution_.
+Except the dice 3D models, which are created by various artists (see [data/AUTHORS.md](data/AUTHORS.md)) and are licensed under _CC Attribution_.
 
 ## Building
 
