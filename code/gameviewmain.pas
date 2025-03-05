@@ -88,8 +88,12 @@ type
 
     { Rotate the dice to match the desired outcome by setting
       TransformDiceToMatchDesired.Rotation.
-      Assumes TransformDiceToMatchDesired is identity at the beginning. }
-    procedure AdjustTransformDiceToMatchDesired(const CurrentResult, Desired: TDiceResult);
+      Assumes TransformDiceToMatchDesired is identity at the beginning.
+
+      This should always work... But I happened on one case where it didn't.
+      Better check result to be sure. }
+    function AdjustTransformDiceToMatchDesired(
+      const CurrentResult, Desired: TDiceResult): Boolean;
 
     procedure ClickThrow(Sender: TObject);
     procedure ClickDesired(Sender: TObject);
@@ -171,29 +175,31 @@ begin
     end;
 end;
 
-procedure TViewMain.AdjustTransformDiceToMatchDesired(const CurrentResult, Desired: TDiceResult);
+function TViewMain.AdjustTransformDiceToMatchDesired(
+  const CurrentResult, Desired: TDiceResult): Boolean;
 var
   Axis: Integer;
   RotationAxis: TVector3;
   NewDiceResult: TDiceResult;
 begin
   if CurrentResult = Desired then
-    Exit; // nothing to do
+    Exit(true); // nothing to do
   { Brute-force solution: rotate 90, -90 or 180 around one axis. }
   for Axis := 0 to 2 do
   begin
     RotationAxis := TVector3.One[Axis];
     TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, -Pi / 2);
     if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
-      Exit;
+      Exit(true);
     TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, Pi / 2);
     if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
-      Exit;
+      Exit(true);
     TransformDiceToMatchDesired.Rotation := Vector4(RotationAxis, Pi);
     if CurrentDiceResult(NewDiceResult) and (NewDiceResult = Desired) then
-      Exit;
+      Exit(true);
   end;
   WritelnWarning('Cannot adjust dice to match desired outcome');
+  Result := false;
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
@@ -350,39 +356,44 @@ procedure TViewMain.ClickThrow(Sender: TObject);
     TimeStart := Timer;
 
     repeat
-      { Run one simulation and see do we get clear result,
-        i.e. CurrentDiceResult returns true.
-
-        CurrentDiceResult may return false if simulation stopped too soon
-        (MaxRecordedSimulationSeconds was not enough to make DiscPhysics go to
-        sleep) or if dice is not exactly on one of it's sides (e.g. maybe it
-        leans by the wall, slanted).
-        In any of these cases, just run another simulation,
-        StartSimulation randomizes the start conditions. }
-
-      StartSimulation;
-      RecordedSimulationFrames := 0;
-
-      // frame 0 = initial state
-      RecordedSimulation[0].DiceTranslation := DicePhysics.Translation;
-      RecordedSimulation[0].DiceRotation := DicePhysics.Rotation;
-      Inc(RecordedSimulationFrames);
-
       repeat
-        MainViewport.Items.UpdateIncreaseTime(RecordTimeStep);
-        RecordedSimulation[RecordedSimulationFrames].DiceTranslation := DicePhysics.Translation;
-        RecordedSimulation[RecordedSimulationFrames].DiceRotation := DicePhysics.Rotation;
-        // debug:
-        // WritelnLog('Recorded frame %d, pos: %s', [RecordedSimulationFrames, DicePhysics.Translation.ToString]);
+        { Run one simulation and see do we get clear result,
+          i.e. CurrentDiceResult returns true.
+
+          CurrentDiceResult may return false if simulation stopped too soon
+          (MaxRecordedSimulationSeconds was not enough to make DiscPhysics go to
+          sleep) or if dice is not exactly on one of it's sides (e.g. maybe it
+          leans by the wall, slanted).
+          In any of these cases, just run another simulation,
+          StartSimulation randomizes the start conditions. }
+
+        StartSimulation;
+        RecordedSimulationFrames := 0;
+
+        // frame 0 = initial state
+        RecordedSimulation[0].DiceTranslation := DicePhysics.Translation;
+        RecordedSimulation[0].DiceRotation := DicePhysics.Rotation;
         Inc(RecordedSimulationFrames);
-      until
-        (RecordedSimulationFrames = MaxRecordedSimulationFrames) or
-        (not DicePhysics.RigidBody.Awake);
 
-      WritelnLog('Recorded %d frames', [RecordedSimulationFrames]);
-    until CurrentDiceResult(NowDiceResult);
+        repeat
+          MainViewport.Items.UpdateIncreaseTime(RecordTimeStep);
+          RecordedSimulation[RecordedSimulationFrames].DiceTranslation := DicePhysics.Translation;
+          RecordedSimulation[RecordedSimulationFrames].DiceRotation := DicePhysics.Rotation;
+          // debug:
+          // WritelnLog('Recorded frame %d, pos: %s', [RecordedSimulationFrames, DicePhysics.Translation.ToString]);
+          Inc(RecordedSimulationFrames);
+        until
+          (RecordedSimulationFrames = MaxRecordedSimulationFrames) or
+          (not DicePhysics.RigidBody.Awake);
 
-    AdjustTransformDiceToMatchDesired(NowDiceResult, DesiredOutcome);
+        WritelnLog('Recorded %d frames', [RecordedSimulationFrames]);
+      until CurrentDiceResult(NowDiceResult);
+
+      WritelnLog('Recorded simulation result is %d, rotating to be %d', [
+        NowDiceResult,
+        DesiredOutcome
+      ]);
+    until AdjustTransformDiceToMatchDesired(NowDiceResult, DesiredOutcome);
 
     WritelnLog('Took %f secs to find and record a good simulation', [
       TimeStart.ElapsedTime
