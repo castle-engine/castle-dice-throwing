@@ -6,7 +6,15 @@ Despite using the physics simulation (so it looks nice and random), the result i
 
 Using [Castle Game Engine](https://castle-engine.io/).
 
+Note that a _debug_ build (with `DEBUG` symbol) shows additional UI to tweak physics parameters.
+
 ![Screenshot](screenshot.png)
+
+## Pland and Download
+
+Play the web version without installation: https://castle-engine.io/web-demos/castle-dice-throwing/
+
+Desktop versions (Windows, Linux): download release here: https://github.com/castle-engine/castle-dice-throwing/releases/latest
 
 ## Copyright and License
 

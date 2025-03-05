@@ -40,3 +40,7 @@ AndroidSigningProperties.txt
 
 # May contain settings specific to your user / machine
 CastleProjectLocalSettings.json
+
+# builds
+*.tar.gz
+*.zip
